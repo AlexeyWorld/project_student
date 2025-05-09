@@ -71,7 +71,7 @@
   .about__image {
     width: 250px;
     height: 250px;
-    border-radius: 60%;
+    border-radius: 50%;
     object-fit: cover;
     border: 5px solid var(--accent);
   }
