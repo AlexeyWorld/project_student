@@ -69,8 +69,8 @@
   }
   
   .about__image {
-    width: 350px;
-    height: 350px;
+    width: 450px;
+    height: 450px;
     border-radius: 60%;
     object-fit: cover;
     border: 5px solid var(--accent);
