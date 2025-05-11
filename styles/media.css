@@ -1,0 +1,30 @@
+@media (max-width: 768px) {
+    .container {
+      width: 90%;
+  }
+    
+    .about__container {
+      flex-direction: column;
+  }
+    
+    .about__image {
+      margin-bottom: 30px;
+  }
+    
+    .header__title {
+      font-size: 2rem;
+  }
+  @media (max-width: 768px) {
+    .about__image {
+    width: 200px;
+    height: 200px;
+  
+  }
+
+  @media (max-width: 480px) {
+  .about__image {
+    width: 150px;
+    height: 150px;
+  }
+
+  }
