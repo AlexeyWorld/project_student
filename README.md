@@ -8,3 +8,4 @@
 ---
 # Реализация проекта:
 https://www.figma.com/proto/YHUaFL9Si4na1x9b2dPiWN/Untitled?node-id=17-5&p=f&t=jjDb4X758RRSuwIV-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1
+Выбираем ширину экрана 768px
