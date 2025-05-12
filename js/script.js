@@ -1,38 +1,23 @@
 'use strict'
 
-document.addEventListener('DOMContentLoaded', () => {
+const element = document.getElementById('.png'); // Замените 'myElement' на ID вашего элемента
 
-    const intensiveImg = document.querySelector("1.png");
+// Функция, которая будет выполняться при возникновении события
+function handleEvent(event) {
+  console.log('Событие произошло:', event.type); // Выводим в консоль тип события
+  console.log('Целевой элемент:', event.target); // Выводим целевой элемент
+  // Здесь можно добавить любую другую логику, которую нужно выполнить при событии
+}
 
-    intensiveImg.addEventListener('mouseenter', () => { 
+// Добавляем слушатель события
+// Первый аргумент - тип события (например, 'scroll', 'click', 'mouseover')
+// Второй аргумент - функция, которая будет вызвана при возникновении события
+element.addEventListener('click', handleEvent); // Пример: слушаем событие 'click'
 
-             console.log('Мышка наведена на изображение, показываем текст');
-
-     });
-
-intensiveImg.addEventListener('mouseleave', () => {
-
-    console.log('Мышка покинула изображение, скрываем текст');
-
+// Пример добавления слушателя для события прокрутки (scroll) на всем окне:
+window.addEventListener('scroll', function(event) {
+  console.log('Прокрутка страницы:', window.scrollY); // Выводим текущую позицию прокрутки
 });
-
-intensiveImg.addEventListener('click', () => {
-
-    alert('Изображение было кликнуто!');
-
-});
-
-const newElement = document.createElement('p');
-
-newElement.textContent = 'Это динамически добавленный текст.';
-
-intensiveImg.parentNode.insertBefore(newElement, intensiveImg.nextSibling);
-
-newElement.style.color = 'blue';
-
-});
-    
-       
        
                    
 
