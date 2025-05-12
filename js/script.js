@@ -1,25 +1,60 @@
 'use strict'
 
-const element = document.getElementById('.png'); // Замените 'myElement' на ID вашего элемента
+/**
+ * DYNAMIC IMAGE HOVER EFFECT
+ * Алгоритм:
+ * 1. Найти все изображения с классом .hover-target
+ * 2. Для каждого изображения:
+ *    a. Проверить существование элемента
+ *    b. Получить связанные элементы (контейнер, подпись)
+ *    c. Проверить поддержку hover-событий
+ *    d. Добавить обработчики с проверкой существования элемента
+ * 
+ * Блок-схема: https://example.com/hover-flowchart
+ */
 
-// Функция, которая будет выполняться при возникновении события
-function handleEvent(event) {
-  console.log('Событие произошло:', event.type); // Выводим в консоль тип события
-  console.log('Целевой элемент:', event.target); // Выводим целевой элемент
-  // Здесь можно добавить любую другую логику, которую нужно выполнить при событии
-}
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Находим все целевые изображения
+  const hoverImages = document.querySelectorAll('.hover-target');
+  
+  // Проверяем, найдены ли элементы
+  if (!hoverImages.length) {
+    console.warn('Элементы .hover-target не найдены');
+    return;
+  }
 
-// Добавляем слушатель события
-// Первый аргумент - тип события (например, 'scroll', 'click', 'mouseover')
-// Второй аргумент - функция, которая будет вызвана при возникновении события
-element.addEventListener('click', handleEvent); // Пример: слушаем событие 'click'
+  // 2. Обрабатываем каждое изображение
+  hoverImages.forEach(image => {
+    // a. Проверяем существование элемента
+    if (!image) {
+      console.error('Элемент не существует', image);
+      return;
+    }
 
-// Пример добавления слушателя для события прокрутки (scroll) на всем окне:
-window.addEventListener('scroll', function(event) {
-  console.log('Прокрутка страницы:', window.scrollY); // Выводим текущую позицию прокрутки
-});
-       
-                   
-
+    // b. Получаем связанные элементы с проверкой
+    const container = image.closest('.image-container') || image.parentNode;
+    const caption = container?.querySelector('.image-caption');
     
+    // c. Проверяем поддержку hover
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    
+    if (supportsHover) {
+      // d. Добавляем обработчики с проверкой
+      try {
+        image.addEventListener('mouseover', () => {
+          image.classList.add('hovered');
+          if (caption) caption.style.opacity = '1';
+          console.log('Mouseover on:', image.src);
+        });
+        
+        image.addEventListener('mouseout', () => {
+          image.classList.remove('hovered');
+          if (caption) caption.style.opacity = '0';
+        });
+      } catch (error) {
+        console.error('Ошибка добавления обработчиков:', error);
+      }
+    }
+  });
+});
        
