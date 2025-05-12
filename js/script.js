@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const intensiveImg = document.querySelector(".png");
+    const intensiveImg = document.querySelector("1.png");
 
     intensiveImg.addEventListener('mouseenter', () => { 
 
