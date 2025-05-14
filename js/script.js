@@ -194,4 +194,148 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     checkForModals();
+  // 1. Инициализация навигации
+        const initNavigation = () => {
+            const navItems = [
+                { text: "Главная", href: "#" },
+                { text: "Обо мне", href: "#about" },
+                { text: "Курсы", href: "#courses" },
+                { text: "Материалы", href: "#materials" },
+                { text: "Контакты", href: "#contacts" }
+            ];
+
+            const navContainer = document.getElementById('mainNavigation');
+            if (navContainer) {
+                navItems.forEach(item => {
+                    const navItem = document.createElement('li');
+                    navItem.className = 'nav-item';
+                    navItem.innerHTML = `<a href="${item.href}" class="nav-link">${item.text}</a>`;
+                    navContainer.appendChild(navItem);
+                });
+            }
+        };
+
+        // 2. Динамическая загрузка курсов
+        const loadCourses = () => {
+            const coursesData = [
+                {
+                    icon: "📜",
+                    title: "Всемирная история",
+                    description: "Основные эпохи и ключевые события мировой истории. Для учащихся 5-9 классов.",
+                    buttonText: "Подробнее"
+                },
+                {
+                    icon: "🏛️",
+                    title: "История России",
+                    description: "От древности до современности. Для учащихся 6-11 классов.",
+                    buttonText: "Подробнее"
+                },
+                {
+                    icon: "✍️",
+                    title: "Подготовка к ЕГЭ/ОГЭ",
+                    description: "Разбор заданий, тесты и индивидуальные консультации.",
+                    buttonText: "Подробнее"
+                }
+            ];
+
+            const coursesGrid = document.querySelector('.courses__grid');
+            if (coursesGrid) {
+                coursesGrid.innerHTML = ''; // Очищаем существующие элементы
+                
+                coursesData.forEach(course => {
+                    const courseElement = document.createElement('article');
+                    courseElement.className = 'course-card';
+                    courseElement.innerHTML = `
+                        <div class="course-card__icon">${course.icon}</div>
+                        <h3 class="course-card__title">${course.title}</h3>
+                        <p class="course-card__description">${course.description}</p>
+                        <a href="#" class="course-card__button button button_theme_primary">${course.buttonText}</a>
+                    `;
+                    coursesGrid.appendChild(courseElement);
+                });
+            }
+        };
+
+        // 3. Динамическая загрузка материалов
+        const loadMaterials = () => {
+            const materialsData = [
+                { name: "Конспект по Древнему миру (PDF)" },
+                { name: "Таблица правителей России (XLSX)" },
+                { name: "Хронология Второй мировой войны (PDF)" }
+            ];
+
+            const materialsList = document.querySelector('.materials__list');
+            if (materialsList) {
+                materialsList.innerHTML = ''; // Очищаем существующие элементы
+                
+                materialsData.forEach(material => {
+                    const materialItem = document.createElement('li');
+                    materialItem.className = 'materials__item';
+                    materialItem.innerHTML = `
+                        <a href="#" class="materials__link">${material.name}</a>
+                    `;
+                    materialsList.appendChild(materialItem);
+                });
+            }
+        };
+
+        // 4. Динамическая загрузка обучающих материалов
+        const loadLearningMaterials = () => {
+            const learningMaterialsData = [
+                {
+                    badge: "5 класс",
+                    title: "Древний мир",
+                    description: "Конспекты, карты и тесты по истории Древнего Египта, Греции и Рима.",
+                    buttonText: "Скачать"
+                },
+                {
+                    badge: "6 класс",
+                    title: "Средние века",
+                    description: "Таблицы феодальной системы, крестовые походы, Возрождение.",
+                    buttonText: "Скачать"
+                },
+                {
+                    badge: "7 класс",
+                    title: "Новое время",
+                    description: "Великие географические открытия, реформация, абсолютизм.",
+                    buttonText: "Скачать"
+                }
+            ];
+
+            const learningMaterialsGrid = document.querySelector('.learning-materials__grid');
+            if (learningMaterialsGrid) {
+                learningMaterialsGrid.innerHTML = ''; // Очищаем существующие элементы
+                
+                learningMaterialsData.forEach(material => {
+                    const materialElement = document.createElement('article');
+                    materialElement.className = 'material-card';
+                    materialElement.innerHTML = `
+                        <span class="material-card__badge">${material.badge}</span>
+                        <h3 class="material-card__title">${material.title}</h3>
+                        <p class="material-card__description">${material.description}</p>
+                        <a href="#" class="material-card__button button button_theme_primary">${material.buttonText}</a>
+                    `;
+                    learningMaterialsGrid.appendChild(materialElement);
+                });
+            }
+        };
+
+        // Инициализация всех компонентов
+        initNavigation();
+        loadCourses();
+        loadMaterials();
+        loadLearningMaterials();
+
+        // Плавный скролл для навигационных ссылок
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 });
