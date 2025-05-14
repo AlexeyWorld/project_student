@@ -19,28 +19,32 @@
   document.addEventListener('DOMContentLoaded', function() {
     const imageWrapper = document.querySelector('.about__image-wrapper');
     
-    // Проверяем, является ли устройство сенсорным
+    if (!imageWrapper) return;
+    
+    // Проверяем тип устройства
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
-    if (isTouchDevice && imageWrapper) {
-        let isCaptionVisible = false;
-        
+    if (isTouchDevice) {
+        // Для touch-устройств
         imageWrapper.addEventListener('click', function(e) {
             e.preventDefault();
-            const caption = this.querySelector('.image-caption');
-            
-            if (isCaptionVisible) {
-                caption.style.transform = 'translateY(100%)';
-                caption.style.opacity = '0';
-            } else {
-                caption.style.transform = 'translateY(0)';
-                caption.style.opacity = '1';
-            }
-            
-            isCaptionVisible = !isCaptionVisible;
+            this.classList.toggle('active');
+        });
+    } else {
+        // Для компьютеров
+        imageWrapper.addEventListener('mouseenter', function() {
+            this.classList.add('hover-active');
+        });
+        
+        imageWrapper.addEventListener('mouseleave', function() {
+            this.classList.remove('hover-active');
         });
     }
-
-  });
+    
+    // Закрытие по клику вне области (для мобильных)
+    document.addEventListener('click', function(e) {
+        if (isTouchDevice && imageWrapper && !imageWrapper.contains(e.target)) {
+            imageWrapper.classList.remove('active');
+        }
+    });
 });
-       
