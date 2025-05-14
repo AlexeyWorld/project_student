@@ -16,6 +16,30 @@
   const intensiveImg = document.querySelector(".about");
   intensiveImg.addEventListener('mouseenter', () => {
             console.log('Мышка наведена на изображение, показываем текст');
+  document.addEventListener('DOMContentLoaded', function() {
+    const imageWrapper = document.querySelector('.about__image-wrapper');
+    
+    // Проверяем, является ли устройство сенсорным
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    if (isTouchDevice && imageWrapper) {
+        let isCaptionVisible = false;
+        
+        imageWrapper.addEventListener('click', function(e) {
+            e.preventDefault();
+            const caption = this.querySelector('.image-caption');
+            
+            if (isCaptionVisible) {
+                caption.style.transform = 'translateY(100%)';
+                caption.style.opacity = '0';
+            } else {
+                caption.style.transform = 'translateY(0)';
+                caption.style.opacity = '1';
+            }
+            
+            isCaptionVisible = !isCaptionVisible;
+        });
+    }
 
   });
 });
