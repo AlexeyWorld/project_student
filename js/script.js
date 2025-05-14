@@ -3,53 +3,52 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log('Скрипт загружен');
     
+    // 1. Обработка изображения с подписью
     const imageWrapper = document.querySelector('.about__image-wrapper');
     const imageCaption = document.querySelector('.image-caption');
     
-    if (!imageWrapper || !imageCaption) return;
-    
-    // Проверяем тип устройства
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    
-    if (isTouchDevice) {
-        // Для touch-устройств
-        imageWrapper.addEventListener('click', function(e) {
-            e.preventDefault();
-            imageCaption.style.opacity = imageCaption.style.opacity === '1' ? '0' : '1';
-            imageCaption.style.visibility = imageCaption.style.visibility === 'visible' ? 'hidden' : 'visible';
-        });
+    if (imageWrapper && imageCaption) {
+        // Проверяем тип устройства
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
-        // Закрытие по клику вне области (для мобильных)
-        document.addEventListener('click', function(e) {
-            if (!imageWrapper.contains(e.target)) {
+        if (isTouchDevice) {
+            // Для touch-устройств
+            imageWrapper.addEventListener('click', function(e) {
+                e.preventDefault();
+                imageCaption.style.opacity = imageCaption.style.opacity === '1' ? '0' : '1';
+                imageCaption.style.visibility = imageCaption.style.visibility === 'visible' ? 'hidden' : 'visible';
+            });
+            
+            // Закрытие по клику вне области (для мобильных)
+            document.addEventListener('click', function(e) {
+                if (!imageWrapper.contains(e.target)) {
+                    imageCaption.style.opacity = '0';
+                    imageCaption.style.visibility = 'hidden';
+                }
+            });
+        } else {
+            // Для компьютеров
+            imageWrapper.addEventListener('mouseenter', function() {
+                console.log('Навели курсор на изображение');
+                imageCaption.style.opacity = '1';
+                imageCaption.style.visibility = 'visible';
+            });
+            
+            imageWrapper.addEventListener('mouseleave', function() {
+                console.log('Убрали курсор с изображения');
                 imageCaption.style.opacity = '0';
                 imageCaption.style.visibility = 'hidden';
-            }
-        });
-    } else {
-        // Для компьютеров
-        imageWrapper.addEventListener('mouseenter', function() {
-            console.log('Навели курсор на изображение');
-            imageCaption.style.opacity = '1';
-            imageCaption.style.visibility = 'visible';
-        });
-        
-        imageWrapper.addEventListener('mouseleave', function() {
-            console.log('Убрали курсор с изображения');
-            imageCaption.style.opacity = '0';
-            imageCaption.style.visibility = 'hidden';
-        });
+            });
+        }
     }
-  'use strict';
 
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Создаем массив из заголовков разделов
+    // 2. Создаем массив из заголовков разделов
     const sectionTitles = Array.from(document.querySelectorAll('section[id] h2.title')).map(title => ({
         text: title.textContent,
         id: title.closest('section').id
     }));
 
-    // 2. Создаем навигационное меню
+    // 3. Создаем навигационное меню
     const createNavigationMenu = () => {
         const navContainer = document.createElement('div');
         navContainer.className = 'headings-nav';
@@ -105,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.head.appendChild(style);
     };
 
-    // 3. Проверяем наличие всплывающих форм
+    // 4. Проверяем наличие всплывающих форм
     const checkForModals = () => {
         const modal = document.querySelector('.modal');
         const modalButtons = document.querySelectorAll('[data-modal]');
@@ -138,8 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-          // 4. Добавляем кнопку скролла вверх
-        const addScrollToTopButton = () => {
+    // 5. Добавляем кнопку скролла вверх
+    const addScrollToTopButton = () => {
         const scrollBtn = document.createElement('button');
         scrollBtn.className = 'scroll-top';
         scrollBtn.innerHTML = '↑';
@@ -195,5 +194,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     checkForModals();
-});
 });
