@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // Удаляем прелоадер из DOM после анимации
             preloader.addEventListener('transitionend', function() {
                 this.remove();
-            });
-        }, 1000); // Время в миллисекундах
+        });
+        
     };
 
     // Обработка изображения с подписью
