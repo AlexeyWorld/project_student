@@ -3,28 +3,28 @@
         "src": "image/history1.jpg",
         "alt": "Урок истории в классе",
         "caption": "Интерактивный урок по Древнему Египту",
-        "width": 1920,
-        "height": 1080
+        "width": 520,
+        "height": 520
     },
     {
         "src": "image/history2.jpg",
         "alt": "Экскурсия в музей",
         "caption": "Экскурсия в исторический музей",
-        "width": 1600,
-        "height": 1200
+        "width": 520,
+        "height": 520
     },
     {
         "src": "image/history3.jpg",
         "alt": "Работа с документами",
         "caption": "Исследование исторических документов",
-        "width": 1280,
-        "height": 720
+        "width": 520,
+        "height": 520
     },
     {
         "src": "image/history4.jpg",
         "alt": "Школьный проект",
         "caption": "Защита исторического проекта",
-        "width": 2048,
-        "height": 1365
+        "width": 520,
+        "height": 520
     }
 ]
