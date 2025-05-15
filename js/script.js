@@ -5,21 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Инициализация прелоадера
     const initPreloader = () => {
-        const preloader = document.getElementById('preloader');
-        const content = document.getElementById('content');
+        const preloader = document.querySelector('.preloader');
+        if (!preloader) return;
         
-        if (!preloader || !content) return;
-        
-        preloader.style.display = 'flex';
-        
+        // Задержка для демонстрации (можно убрать)
         setTimeout(() => {
-            preloader.classList.add('fade-out');
-            content.classList.add('show');
+            preloader.classList.add('preloader--hidden');
             
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
-        }, 1500);
+            // Удаляем прелоадер из DOM после анимации
+            preloader.addEventListener('transitionend', function() {
+                this.remove();
+            });
+        }, 1000); // Время в миллисекундах
     };
 
     // Обработка изображения с подписью
