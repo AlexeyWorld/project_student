@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт учителя истории ИсторияПлюс | Бушмелева Анна Валерьевна</title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page">
+    <!-- Навигационная шапка -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">ИсторияПлюс</a>
+            <ul class="nav-menu" id="mainNavigation">
+                <!-- Навигация будет добавлена через JS -->
+            </ul>
+        </div>
+    </nav>
+    <!-- Шапка с заголовком -->
+    <header class="header">
+        <div class="header__content container">
+            <div class="header__text">
+                <h1 class="header__title">Изучаем историю вместе!</h1>
+                <p class="header__subtitle">Сайт учителя истории ИсторияПлюс Бушмелева Анна Валерьевна</p>
+                <div class="header__buttons">
+                    <a href="#courses" class="button button_theme_primary">Мои курсы</a>
+                    <a href="#contacts" class="button button_theme_outline">Контакты</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <!-- Раздел "О себе" -->
+        <section id="about" class="about">
+            <div class="about__container container">
+                <div class="about__image-wrapper">
+                    <img src="1.png" alt="Бушмелева Анна Валерьевна" class="about__image">
+                    <div class="image-caption">
+                        <p>Умом ты можешь не блистать, но знать историю обязан!</p>
+                    </div>
+                </div>
+                <div class="about__content">
+                    <h2 class="about__title title">Обо мне</h2>
+                    <div class="about__text">
+                        <p class="about__paragraph">Меня зовут Бушмелева Анна Валерьевна. Я преподаватель истории с [X] летним стажем. Закончила [Название ВУЗа] по специальности "История".</p>
+                        <p class="about__paragraph">Моя миссия - сделать историю живой и интересной для каждого ученика. На уроках мы не просто изучаем даты, а анализируем события, работаем с источниками и учимся мыслить критически.</p>
+                        <blockquote class="about__quote">"История — это не просто даты, это судьбы людей и уроки для будущего."</blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Раздел "Курсы" -->
+        <section id="courses" class="courses">
+            <div class="container">
+                <h2 class="courses__title title">Мои курсы</h2>
+                <div class="courses__grid">
+                    <!-- Курс 1 -->
+                    <article class="course-card">
+                        <div class="course-card__icon">📜</div>
+                        <h3 class="course-card__title">Всемирная история</h3>
+                        <p class="course-card__description">Основные эпохи и ключевые события мировой истории. Для учащихся 5-9 классов.</p>
+                        <a href="#" class="course-card__button button button_theme_primary">Подробнее</a>
+                    </article>
+                    
+                    <!-- Курс 2 -->
+                    <article class="course-card">
+                        <div class="course-card__icon">🏛️</div>
+                        <h3 class="course-card__title">История России</h3>
+                        <p class="course-card__description">От древности до современности. Для учащихся 6-11 классов.</p>
+                        <a href="#" class="course-card__button button button_theme_primary">Подробнее</a>
+                    </article>
+                    
+                    <!-- Курс 3 -->
+                    <article class="course-card">
+                        <div class="course-card__icon">✍️</div>
+                        <h3 class="course-card__title">Подготовка к ЕГЭ/ОГЭ</h3>
+                        <p class="course-card__description">Разбор заданий, тесты и индивидуальные консультации.</p>
+                        <a href="#" class="course-card__button button button_theme_primary">Подробнее</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Раздел "Материалы" -->
+        <section id="materials" class="materials">
+            <div class="container">
+                <h2 class="materials__title title">Методические материалы</h2>
+                <div class="materials__content">
+                    <h3 class="materials__subtitle">Полезные файлы для скачивания:</h3>
+                    <ul class="materials__list">
+                        <li class="materials__item"><a href="#" class="materials__link">Конспект по Древнему миру (PDF)</a></li>
+                        <li class="materials__item"><a href="#" class="materials__link">Таблица правителей России (XLSX)</a></li>
+                        <li class="materials__item"><a href="#" class="materials__link">Хронология Второй мировой войны (PDF)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Раздел "Обучающие материалы" -->
+        <section id="learning-materials" class="learning-materials">
+            <div class="container">
+                <h2 class="learning-materials__title title">Обучающие материалы (5-9 класс)</h2>
+                <div class="learning-materials__grid">
+                    <!-- Материал 1 -->
+                    <article class="material-card">
+                        <span class="material-card__badge">5 класс</span>
+                        <h3 class="material-card__title">Древний мир</h3>
+                        <p class="material-card__description">Конспекты, карты и тесты по истории Древнего Египта, Греции и Рима.</p>
+                        <a href="#" class="material-card__button button button_theme_primary">Скачать</a>
+                    </article>
+                    
+                    <!-- Материал 2 -->
+                    <article class="material-card">
+                        <span class="material-card__badge">6 класс</span>
+                        <h3 class="material-card__title">Средние века</h3>
+                        <p class="material-card__description">Таблицы феодальной системы, крестовые походы, Возрождение.</p>
+                        <a href="#" class="material-card__button button button_theme_primary">Скачать</a>
+                    </article>
+                    
+                    <!-- Материал 3 -->
+                    <article class="material-card">
+                        <span class="material-card__badge">7 класс</span>
+                        <h3 class="material-card__title">Новое время</h3>
+                        <p class="material-card__description">Великие географические открытия, реформация, абсолютизм.</p>
+                        <a href="register.html" class="material-card__button button button_theme_primary">Скачать</a>
+                    </article>
+                </div>
+                
+                <div class="learning-materials__registration">
+                    <a href="register.html" class="button button_theme_primary">Зарегистрироваться для доступа ко всем материалам</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Раздел "Галерея" -->
+        <section id="gallery" class="gallery">
+            <div class="container">
+                <h2 class="gallery__title title">Галерея</h2>
+                <div class="gallery__content">
+                    <div class="gallery__grid" id="galleryGrid">
+                     <!-- Изображения будут загружены через JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Раздел "Контакты" -->
+        <section id="contacts" class="contacts">
+            <div class="container">
+                <h2 class="contacts__title title">Свяжитесь со мной</h2>
+                <div class="contacts__content">
+                    <p class="contacts__info">Email: <a href="mailto:teacher@example.com" class="contacts__link">teacher@example.com</a></p>
+                    <p class="contacts__info">Телефон: <a href="tel:+7XXXXXXXXXX" class="contacts__link">+7 (XXX) XXX-XX-XX</a></p>
+                    <div class="contacts__social">
+                        <a href="#" class="contacts__social-link">ВКонтакте</a> | 
+                        <a href="#" class="contacts__social-link">Telegram</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__copyright">© 2025 Сайт учителя истории. Все права защищены.</p>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
