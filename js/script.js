@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!preloader) return;
         
         // Задержка для демонстрации (можно убрать)
-        setTimeout(() => {
+        
             preloader.classList.add('preloader--hidden');
             
             // Удаляем прелоадер из DOM после анимации
