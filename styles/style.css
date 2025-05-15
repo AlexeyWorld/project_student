@@ -1,0 +1,443 @@
+/* Переменные */
+:root {
+  --primary: #4E3A2D;
+  --accent: #8B5A2B;
+  --light: #FFF9F0;
+  --text: #333333;
+  --white: #ffffff;
+  --gray-light: #f5f5f5;
+}
+
+/* Базовые стили */
+.page {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-color: var(--light);
+}
+
+.container {
+  width: 85%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Блок header */
+.header {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url('https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.header__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header__title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.header__subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Блок about */
+.about {
+  padding: 60px 0;
+}
+
+.about__container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.about__image-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid var(--accent);
+  transition: transform 0.3s ease;
+}
+
+.about__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.about__image-wrapper:hover .image-caption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.about__image-wrapper:hover .about__image {
+  transform: scale(1.05);
+}
+
+.about__content {
+  flex: 1;
+}
+
+.about__quote {
+  font-style: italic;
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+  margin: 20px 0;
+}
+
+/* Блок courses */
+.courses {
+  background-color: var(--white);
+  padding: 60px 0;
+}
+
+.courses__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* Элемент course-card */
+.course-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--white);
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.course-card__icon {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.course-card__title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+/* Блок materials */
+.materials {
+  padding: 60px 0;
+  background-color: var(--gray-light);
+}
+
+.materials__list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.materials__item {
+  margin-bottom: 10px;
+}
+
+.materials__link {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.materials__link:hover {
+  text-decoration: underline;
+}
+
+/* Блок learning-materials */
+.learning-materials {
+  padding: 60px 0;
+}
+
+.learning-materials__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.material-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s;
+  background-color: var(--white);
+}
+
+.material-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.material-card__badge {
+  display: inline-block;
+  background-color: var(--accent);
+  color: var(--white);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.material-card__title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+/* Блок contacts */
+.contacts {
+  padding: 60px 0;
+}
+
+.contacts__info {
+  margin-bottom: 15px;
+}
+
+.contacts__link {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.contacts__link:hover {
+  text-decoration: underline;
+}
+
+.contacts__social {
+  margin-top: 20px;
+}
+
+.contacts__social-link {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* Блок footer */
+.footer {
+  background-color: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 60px;
+}
+
+/* Кнопки */
+.button {
+  display: inline-block;
+  padding: 12px 30px;
+  margin: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.button_theme_primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.button_theme_primary:hover {
+  background-color: #3a2b20;
+}
+
+.button_theme_outline {
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+.button_theme_outline:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* Стили для навигационной шапки */
+.main-nav {
+  background-color: #2c3e50;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nav-logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin-left: 1.5rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #3498db;
+}
+
+/* Стили для прелоадера */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
+
+.preloader.fade-out {
+  opacity: 0;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ddd;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Стили для основного контента */
+.content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.content.show {
+  display: block;
+  opacity: 1;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+  
+  .about__container {
+    flex-direction: column;
+  }
+  
+  .about__image-wrapper {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 30px;
+  }
+  
+  .header__title {
+    font-size: 2rem;
+  }
+  
+  .nav-container {
+    flex-direction: column;
+  }
+  
+  .nav-menu {
+    margin-top: 1rem;
+  }
+  
+  .nav-item {
+    margin: 0 0.5rem;
+  }
+  
+  .about__image-wrapper:active .image-caption {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .about__image-wrapper {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .header {
+    padding: 60px 20px;
+  }
+  
+  .header__title {
+    font-size: 1.8rem;
+  }
+  
+  .header__subtitle {
+    font-size: 1rem;
+  }
+  
+  .courses__grid,
+  .learning-materials__grid {
+    grid-template-columns: 1fr;
+  }
+}
