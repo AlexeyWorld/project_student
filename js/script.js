@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ключи для LocalStorage
     const STORAGE_KEYS = {
         GALLERY_LAST_VIEWED: 'gallery_last_viewed',
+        GALLERY_LAST_VIEWED_INDEX: 'gallery_last_viewed_index',
         DARK_MODE: 'dark_mode',
         FONT_SIZE: 'font_size'
     };
@@ -15,13 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const preloader = document.querySelector('.preloader');
         if (!preloader) return;
         
-        setTimeout(() => {
+        const hidePreloader = () => {
             preloader.classList.add('preloader--hidden');
             
             preloader.addEventListener('transitionend', function() {
                 this.remove();
-            });
-        }, 1000);
+            }, { once: true });
+        };
+
+        // Если страница уже загружена, скрываем прелоадер сразу
+        if (document.readyState === 'complete') {
+            hidePreloader();
+        } else {
+            window.addEventListener('load', hidePreloader);
+        }
     };
 
     // Сохранение данных в LocalStorage
@@ -59,8 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
         if (isTouchDevice) {
+            let clickTimer;
+            
             imageWrapper.addEventListener('click', (e) => {
                 e.preventDefault();
+                clearTimeout(clickTimer);
+                
                 const isVisible = imageCaption.style.opacity === '1';
                 toggleCaption(!isVisible);
             });
@@ -78,10 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Навигационное меню
     const initNavigationMenu = () => {
-        const sectionTitles = Array.from(document.querySelectorAll('section[id] h2.title')).map(title => ({
-            text: title.textContent.trim(),
-            id: title.closest('section').id
-        }));
+        const sectionTitles = Array.from(document.querySelectorAll('section[id] h2.title'))
+            .filter(title => title.closest('section'))
+            .map(title => ({
+                text: title.textContent.trim(),
+                id: title.closest('section').id
+            }));
 
         if (sectionTitles.length === 0) return;
 
@@ -149,15 +163,18 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
         };
         
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-        
-        scrollBtn.addEventListener('click', () => {
+        const scrollToTop = () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
-        });
+        };
+        
+        window.addEventListener('scroll', handleScroll);
+        scrollBtn.addEventListener('click', scrollToTop);
+        
+        // Инициализация начального состояния
+        handleScroll();
     };
 
     // Динамическая загрузка контента
@@ -167,19 +184,91 @@ document.addEventListener("DOMContentLoaded", () => {
                 icon: "📜",
                 title: "Всемирная история",
                 description: "Основные эпохи и ключевые события мировой истории. Для учащихся 5-9 классов.",
-                buttonText: "Подробнее"
+                buttonText: "Подробнее",
+                files: [
+                    { name: "Программа курса.pdf", path: "courses/world-history/program.pdf" },
+                    { name: "Конспект лекций.zip", path: "courses/world-history/lectures.zip" },
+                    { name: "Тестовые задания.docx", path: "courses/world-history/tests.docx" }
+                ],
+                details: `
+                    <div class="course-details">
+                        <h4>Содержание курса:</h4>
+                        <ul>
+                            <li>Древний мир</li>
+                            <li>Средние века</li>
+                            <li>Новое время</li>
+                            <li>Новейшая история</li>
+                        </ul>
+                        <div class="course-files">
+                            <h4>Файлы для скачивания:</h4>
+                            <ul>
+                                <li><a href="courses/world-history/program.pdf" download>Программа курса (PDF)</a></li>
+                                <li><a href="courses/world-history/lectures.zip" download>Конспект лекций (ZIP)</a></li>
+                                <li><a href="courses/world-history/tests.docx" download>Тестовые задания (DOCX)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
             },
             {
                 icon: "🏛️",
                 title: "История России",
                 description: "От древности до современности. Для учащихся 6-11 классов.",
-                buttonText: "Подробнее"
+                buttonText: "Подробнее",
+                files: [
+                    { name: "Хронология.pdf", path: "courses/russian-history/timeline.pdf" },
+                    { name: "Карты.zip", path: "courses/russian-history/maps.zip" },
+                    { name: "Биографии.docx", path: "courses/russian-history/biographies.docx" }
+                ],
+                details: `
+                    <div class="course-details">
+                        <h4>Основные темы:</h4>
+                        <ul>
+                            <li>Киевская Русь</li>
+                            <li>Московское царство</li>
+                            <li>Российская империя</li>
+                            <li>Советский период</li>
+                        </ul>
+                        <div class="course-files">
+                            <h4>Файлы для скачивания:</h4>
+                            <ul>
+                                <li><a href="courses/russian-history/timeline.pdf" download>Хронология (PDF)</a></li>
+                                <li><a href="courses/russian-history/maps.zip" download>Карты (ZIP)</a></li>
+                                <li><a href="courses/russian-history/biographies.docx" download>Биографии (DOCX)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
             },
             {
                 icon: "✍️",
                 title: "Подготовка к ЕГЭ/ОГЭ",
                 description: "Разбор заданий, тесты и индивидуальные консультации.",
-                buttonText: "Подробнее"
+                buttonText: "Подробнее",
+                files: [
+                    { name: "Типовые задания.pdf", path: "courses/exam-prep/tasks.pdf" },
+                    { name: "Методичка.zip", path: "courses/exam-prep/methods.zip" },
+                    { name: "Примеры сочинений.docx", path: "courses/exam-prep/essays.docx" }
+                ],
+                details: `
+                    <div class="course-details">
+                        <h4>Включает:</h4>
+                        <ul>
+                            <li>Разбор всех типов заданий</li>
+                            <li>Методические рекомендации</li>
+                            <li>Примеры исторических сочинений</li>
+                            <li>Пробные тесты</li>
+                        </ul>
+                        <div class="course-files">
+                            <h4>Файлы для скачивания:</h4>
+                            <ul>
+                                <li><a href="courses/exam-prep/tasks.pdf" download>Типовые задания (PDF)</a></li>
+                                <li><a href="courses/exam-prep/methods.zip" download>Методичка (ZIP)</a></li>
+                                <li><a href="courses/exam-prep/essays.docx" download>Примеры сочинений (DOCX)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
             }
         ];
 
@@ -196,16 +285,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const materialsData = [
-            { name: "Конспект по Древнему миру (PDF)" },
-            { name: "Таблица правителей России (XLSX)" },
-            { name: "Хронология Второй мировой войны (PDF)" }
+            { name: "Конспект по Древнему миру (PDF)", path: "materials/ancient-world.pdf" },
+            { name: "Таблица правителей России (XLSX)", path: "materials/russian-rulers.xlsx" },
+            { name: "Хронология Второй мировой войны (PDF)", path: "materials/ww2-timeline.pdf" }
         ];
 
         const materialsList = document.querySelector('.materials__list');
         if (materialsList) {
             materialsList.innerHTML = materialsData.map(material => `
                 <li class="materials__item">
-                    <a href="#" class="materials__link">${material.name}</a>
+                    <a href="${material.path}" download class="materials__link">${material.name}</a>
                 </li>
             `).join('');
         }
@@ -215,19 +304,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 badge: "5 класс",
                 title: "Древний мир",
                 description: "Конспекты, карты и тесты по истории Древнего Египта, Греции и Рима.",
-                buttonText: "Скачать"
+                buttonText: "Скачать",
+                path: "learning-materials/grade5-ancient-world.zip"
             },
             {
                 badge: "6 класс",
                 title: "Средние века",
                 description: "Таблицы феодальной системы, крестовые походы, Возрождение.",
-                buttonText: "Скачать"
+                buttonText: "Скачать",
+                path: "learning-materials/grade6-middle-ages.zip"
             },
             {
                 badge: "7 класс",
                 title: "Новое время",
                 description: "Великие географические открытия, реформация, абсолютизм.",
-                buttonText: "Скачать"
+                buttonText: "Скачать",
+                path: "learning-materials/grade7-new-age.zip"
             }
         ];
 
@@ -238,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="material-card__badge">${material.badge}</span>
                     <h3 class="material-card__title">${material.title}</h3>
                     <p class="material-card__description">${material.description}</p>
-                    <a href="#" class="material-card__button button button_theme_primary">${material.buttonText}</a>
+                    <a href="${material.path}" download class="material-card__button button button_theme_primary">${material.buttonText}</a>
                 </article>
             `).join('');
         }
@@ -273,7 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Получаем последний просмотренный слайд из LocalStorage
         const lastViewedIndex = getFromStorage(STORAGE_KEYS.GALLERY_LAST_VIEWED_INDEX, 0);
         
-        galleryGrid.innerHTML = images.map(image => `
+        galleryGrid.innerHTML = images.map((image, index) => `
             <div class="swiper-slide">
                 <img src="${image.src}" alt="${image.alt || ''}" class="gallery__image" loading="lazy">
                 ${image.caption ? `<div class="gallery__caption">${image.caption}</div>` : ''}
@@ -297,7 +389,11 @@ document.addEventListener("DOMContentLoaded", () => {
             effect: 'slide',
             speed: 800,
             grabCursor: true,
-            initialSlide: lastViewedIndex
+            initialSlide: lastViewedIndex,
+            preloadImages: false,
+            lazy: {
+                loadPrevNext: true,
+            }
         });
 
         // Сохраняем текущий слайд при изменении
