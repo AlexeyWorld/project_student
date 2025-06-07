@@ -202,13 +202,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="course-files">
                             <h4>Файлы для скачивания:</h4>
                             <ul>
-                                <li><a href="courses/world-history/program.pdf" download>Программа курса (PDF)</a></li>
-                                <li><a href="courses/world-history/lectures.zip" download>Конспект лекций (ZIP)</a></li>
-                                <li><a href="courses/world-history/tests.docx" download>Тестовые задания (DOCX)</a></li>
+                                <li><a href="courses/world-history/program.pdf" download="Программа курса.pdf">Программа курса (PDF)</a></li>
+                                <li><a href="courses/world-history/lectures.zip" download="Конспект лекций.zip">Конспект лекций (ZIP)</a></li>
+                                <li><a href="courses/world-history/tests.docx" download="Тестовые задания.docx">Тестовые задания (DOCX)</a></li>
                             </ul>
                         </div>
                     </div>
                 `
+            
             },
             {
                 icon: "🏛️",
@@ -216,9 +217,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 description: "От древности до современности. Для учащихся 6-11 классов.",
                 buttonText: "Подробнее",
                 files: [
-                    { name: "Хронология.pdf", path: "courses/russian-history/timeline.pdf" },
-                    { name: "Карты.zip", path: "courses/russian-history/maps.zip" },
-                    { name: "Биографии.docx", path: "courses/russian-history/biographies.docx" }
+                    { name: "Хронология.pdf", path: "/courses/russian-history/timeline.pdf" },
+                    { name: "Карты.zip", path: "/courses/russian-history/maps.zip" },
+                    { name: "Биографии.docx", path: "/courses/russian-history/biographies.docx" }
                 ],
                 details: `
                     <div class="course-details">
@@ -246,9 +247,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 description: "Разбор заданий, тесты и индивидуальные консультации.",
                 buttonText: "Подробнее",
                 files: [
-                    { name: "Типовые задания.pdf", path: "courses/exam-prep/tasks.pdf" },
-                    { name: "Методичка.zip", path: "courses/exam-prep/methods.zip" },
-                    { name: "Примеры сочинений.docx", path: "courses/exam-prep/essays.docx" }
+                    { name: "Типовые задания.pdf", path: "/courses/exam-prep/tasks.pdf" },
+                    { name: "Методичка.zip", path: "/courses/exam-prep/methods.zip" },
+                    { name: "Примеры сочинений.docx", path: "/courses/exam-prep/essays.docx" }
                 ],
                 details: `
                     <div class="course-details">
@@ -273,15 +274,59 @@ document.addEventListener("DOMContentLoaded", () => {
         ];
 
         const coursesGrid = document.querySelector('.courses__grid');
-        if (coursesGrid) {
-            coursesGrid.innerHTML = coursesData.map(course => `
-                <article class="course-card">
-                    <div class="course-card__icon" aria-hidden="true">${course.icon}</div>
-                    <h3 class="course-card__title">${course.title}</h3>
-                    <p class="course-card__description">${course.description}</p>
-                    <a href="#" class="course-card__button button button_theme_primary">${course.buttonText}</a>
-                </article>
-            `).join('');
+    if (coursesGrid) {
+        coursesGrid.innerHTML = coursesData.map(course => `
+            <article class="course-card">
+                <div class="course-card__icon" aria-hidden="true">${course.icon}</div>
+                <h3 class="course-card__title">${course.title}</h3>
+                <p class="course-card__description">${course.description}</p>
+                <button class="course-card__button button button_theme_primary" data-course-id="${course.title.replace(/\s+/g, '-').toLowerCase()}">
+                    ${course.buttonText}
+                </button>
+                <div class="course-files-modal" id="modal-${course.title.replace(/\s+/g, '-').toLowerCase()}" hidden>
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        ${course.details}
+                    </div>
+                </div>
+            </article>
+        `).join('');
+
+        // Обработчик для кнопок "Подробнее"
+        document.querySelectorAll('.course-card__button').forEach(button => {
+            button.addEventListener('click', function() {
+                const courseId = this.getAttribute('data-course-id');
+                const modal = document.getElementById(`modal-${courseId}`);
+                modal.hidden = false;
+                
+                // Закрытие модального окна
+                modal.querySelector('.close-modal').addEventListener('click', () => {
+                    modal.hidden = true;
+                });
+            });
+        });
+
+        // Обработчик для всех ссылок скачивания
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('.course-files a[download]')) {
+                e.preventDefault();
+                const link = e.target;
+                const fileUrl = link.getAttribute('href');
+                const fileName = link.getAttribute('download');
+                
+                // Создаем временную ссылку для скачивания
+                const a = document.createElement('a');
+                a.href = fileUrl;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                // Логирование для отладки
+                console.log(`Попытка скачать файл: ${fileUrl}`);
+            }
+        });
+    
         }
 
         const materialsData = [
