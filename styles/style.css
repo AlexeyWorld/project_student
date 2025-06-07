@@ -515,6 +515,98 @@ body.dark-mode .nav-link {
   color: var(--accent);
 }
 
+/* Модальные окна курсов */
+.course-materials-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: var(--white);
+  margin: 5% auto;
+  padding: 25px;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 8px;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+}
+
+.close-modal {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--primary);
+  transition: var(--transition);
+}
+
+.close-modal:hover {
+  color: var(--accent);
+}
+
+.course-details {
+  margin: 20px 0;
+  color: var(--text);
+}
+
+.course-details h4 {
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.course-files {
+  margin-top: 20px;
+}
+
+.course-files h4 {
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.course-files ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.course-files li {
+  margin: 10px 0;
+  padding: 10px;
+  border-bottom: 1px solid var(--gray-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-files a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: var(--transition);
+  flex-grow: 1;
+}
+
+.course-files a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.download-all {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--gray-light);
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
   .container {
@@ -556,6 +648,11 @@ body.dark-mode .nav-link {
   .gallerySwiper {
     height: 400px;
   }
+  
+  .modal-content {
+    width: 90%;
+    margin: 10% auto;
+  }
 }
 
 @media (max-width: 480px) {
@@ -592,5 +689,18 @@ body.dark-mode .nav-link {
 
   .gallerySwiper {
     height: 300px;
+  }
+  
+  .modal-content {
+    padding: 15px;
+  }
+  
+  .course-files li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .course-files a {
+    margin-top: 5px;
   }
 }
